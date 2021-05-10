@@ -113,10 +113,11 @@ class App extends React.PureComponent {
 
   getArrowStyle(prop) {
     const value = this.state[prop];
+    const angle =
+      prop === "hours" ? (this.state.minutes / 60 + value) * 30 : value * 6;
+
     const styles = {
-      transform: `rotate(${value * 6}deg) translateY(-${
-        this.arrowHeight[prop]
-      }%) `,
+      transform: `rotate(${angle}deg) translateY(-${this.arrowHeight[prop]}%) `,
     };
     if (value === 0) {
       styles.transition = "none";
