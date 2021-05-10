@@ -43,7 +43,6 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const { seconds, minutes, hours } = this.state;
     console.log(this.state);
     return (
       <div className="App">
