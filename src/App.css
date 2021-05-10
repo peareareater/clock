@@ -1,0 +1,141 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  position: relative;
+}
+
+.clock-wrapper {
+  position: relative;
+  background: black;
+  border-radius: 50%;
+  width: 520px;
+  height: 520px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* overflow: hidden; */
+}
+
+.clock {
+  border-radius: 50%;
+  background-color: white;
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+}
+
+.hour {
+  color: black;
+  position: absolute;
+  z-index: 1;
+}
+
+.arrow {
+  position: absolute;
+}
+
+.diviper-partial {
+  background: black;
+  position: absolute;
+  height: 100%;
+}
+
+.diviper-partial.quarter {
+  width: 6px;
+  z-index: 5;
+}
+
+.diviper-partial.hour {
+  z-index: 5;
+  width: 3px;
+}
+
+.diviper-partial.minute {
+  z-index: 3;
+  width: 1px;
+}
+
+.diviper-partial.label {
+  z-index: 10;
+  height: 84%;
+  background: transparent;
+  color: black;
+  font-size: 32px;
+}
+
+.clock-face {
+  border-radius: 50%;
+  background-color: white;
+  background: white;
+  margin: auto auto;
+  position: absolute;
+}
+
+.clock-face.minutes {
+  width: 475px;
+  height: 475px;
+  z-index: 4;
+}
+
+.clock-face.hours {
+  width: 450px;
+  height: 450px;
+  z-index: 5;
+}
+
+.label {
+  position: absolute;
+  z-index: 10;
+}
+
+.center {
+  width: 10px;
+  height: 10px;
+  background: black;
+  position: absolute;
+  z-index: 10;
+  border-radius: 50%;
+}
+
+.arrow {
+  background: black;
+  height: 36%;
+  width: 2px;
+  position: absolute;
+  z-index: 10;
+  transition: all 0.5s ease-out;
+}
+.arrow.pointer::before,
+.arrow.pointer::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 3px;
+  left: -14px;
+  border-top: 0.13rem solid black;
+  transform: rotate(65deg);
+}
+
+.arrow.pointer::before {
+  transform: rotate(-65deg);
+  left: -4px;
+}
+
+.arrow.pointer.hours {
+  height: 28%;
+}
+
+.arrow.seconds {
+  background: red;
+  height: 40%;
+}
