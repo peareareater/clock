@@ -1,7 +1,9 @@
 .App {
   text-align: center;
 }
-
+body {
+  font-family: "Quicksand", sans-serif;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -109,26 +111,11 @@
 .arrow {
   background: black;
   height: 36%;
-  width: 2px;
+  width: 4px;
   position: absolute;
   z-index: 10;
-  transition: all 0.5s ease-out;
-}
-.arrow.pointer::before,
-.arrow.pointer::after {
-  content: "";
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: 3px;
-  left: -14px;
-  border-top: 0.13rem solid black;
-  transform: rotate(65deg);
-}
-
-.arrow.pointer::before {
-  transform: rotate(-65deg);
-  left: -4px;
+  transition: all 0.5s cubic-bezier(0, 0, 1, -0.15);
+  box-shadow: 10px 20px 20px 3px rgb(0 0 0 / 20%);
 }
 
 .arrow.pointer.hours {

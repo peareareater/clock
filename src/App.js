@@ -13,6 +13,11 @@ class App extends React.PureComponent {
     ];
 
     this.state = {
+      angle: {
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+      },
       hours,
       minutes,
       seconds,
@@ -29,6 +34,7 @@ class App extends React.PureComponent {
         let seconds = prevState.seconds + 1;
         let minutes = prevState.minutes;
         let hours = prevState.hours;
+        const angle = prevState.angle;
 
         if (seconds >= 60) {
           minutes++;
@@ -36,11 +42,32 @@ class App extends React.PureComponent {
         }
         if (minutes >= 60) {
           hours++;
+          minutes = 0;
         }
-        return { seconds, minutes, hours };
+        if (hours >= 12) {
+          hours = 0;
+        }
+        return {
+          seconds,
+          minutes,
+          hours,
+          angle: {
+            hours: angle.hours
+              ? minutes !== prevState.minutes
+                ? this.fixNumber(angle.hours + 0.5)
+                : angle.hours
+              : this.getAngle(hours, "hours"),
+            minutes: angle.minutes
+              ? this.fixNumber(angle.minutes + 0.1)
+              : this.getAngle(minutes, "minutes"),
+            seconds: angle.seconds ? angle.seconds + 6 : this.getAngle(seconds),
+          },
+        };
       });
     }, 1000);
   }
+
+  fixNumber = (num) => Number(num.toFixed(2));
 
   render() {
     console.log(this.state);
@@ -110,17 +137,22 @@ class App extends React.PureComponent {
     );
   }
 
+  getAngle(value, prop) {
+    if (prop && prop === "hours") {
+      return (this.state.minutes / 60 + value) * 30;
+    }
+    if (prop && prop === "minutes") {
+      return (this.state.seconds / 60 + value) * 6;
+    }
+    return value * 6;
+  }
+
   getArrowStyle(prop) {
-    const value = this.state[prop];
-    const angle =
-      prop === "hours" ? (this.state.minutes / 60 + value) * 30 : value * 6;
+    const { angle } = this.state;
 
     const styles = {
-      transform: `rotate(${angle}deg) translateY(-${this.arrowHeight[prop]}%) `,
+      transform: `rotate(${angle[prop]}deg) translateY(-${this.arrowHeight[prop]}%) `,
     };
-    if (value === 0) {
-      styles.transition = "none";
-    }
     return styles;
   }
 
