@@ -2,15 +2,11 @@ import React from "react";
 import "./App.css";
 
 class App extends React.PureComponent {
+  timer;
   constructor() {
     super();
 
-    const now = new Date();
-    const [hours, minutes, seconds] = [
-      now.getHours(),
-      now.getMinutes(),
-      now.getSeconds(),
-    ];
+    const [hours, minutes, seconds] = this.getInitialTime();
 
     this.state = {
       angle: {
@@ -28,8 +24,19 @@ class App extends React.PureComponent {
     this.startTimer();
   }
 
+  getInitialTime = () => {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    if (hours > 12) {
+      hours = hours - 12;
+    }
+    return [hours, minutes, seconds];
+  };
+
   startTimer() {
-    setInterval(() => {
+    this.timer = setInterval(() => {
       this.setState((prevState) => {
         let seconds = prevState.seconds + 1;
         let minutes = prevState.minutes;
@@ -47,6 +54,7 @@ class App extends React.PureComponent {
         if (hours >= 12) {
           hours = 0;
         }
+
         return {
           seconds,
           minutes,
